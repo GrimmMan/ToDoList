@@ -6,11 +6,11 @@ app.set('View engine', 'ejs');
 const path = require('path');
 const PORT = 3000;
 const createPath = (page) => path.resolve(__dirname, 'ejs-view',`${page}.ejs`);
-//const db = 'mongodb+srv://GrimmMan:<pas12345>@cluster0.kjis4.mongodb.net/Test?retryWrites=true&w=majority';
-//mongoose
-  //.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-  //.then((res) => console.log('Connect to DB'))
-  //.catch((error) => console.log(error));
+const db = 'mongodb+srv://GrimmMan:pas12345@cluster0.kjis4.mongodb.net/Test?retryWrites=true&w=majority';
+mongoose
+  .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then((res) => console.log('Connect to DB'))
+  .catch((error) => console.log(error));
  app.get('/', (req,res) => { 
   res.send('Hello World!')
  });
