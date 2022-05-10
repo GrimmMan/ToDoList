@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const mongoose = require('mongoose');
 const app = express();
 app.set('View engine', 'ejs');
@@ -10,6 +11,9 @@ const createPath = (page) => path.resolve(__dirname, 'ejs-view',`${page}.ejs`);
   //.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
   //.then((res) => console.log('Connect to DB'))
   //.catch((error) => console.log(error));
+ app.get('/', (req,res) => { 
+  res.send('Hello World!')
+ });
 app.listen(PORT,(error) => {
     error ? console.log(error) : console.log(`Listening port ${PORT}`);
 })
