@@ -11,9 +11,11 @@ mongoose
   .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((res) => console.log('Connect to DB'))
   .catch((error) => console.log(error));
+
  app.get('/', (req,res) => { 
   res.send('Hello World!')
  });
+ 
 app.listen(PORT,(error) => {
     error ? console.log(error) : console.log(`Listening port ${PORT}`);
 })
