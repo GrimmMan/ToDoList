@@ -11,18 +11,19 @@ mongoose
   .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
   .then((res) => console.log('Connect to DB'))
   .catch((error) => console.log(error));
-//const btnTouch = document.querySelector('btn');
-  //let addMessage = document.querySelector('form-control');
-//let addButton = document.querySelector('.btn2');
-//addButton.addEventListener('click', function(){
-  //console.log(addMessage.value);
-//})
+  
  app.get('/', (req,res) => { 
   const title = 'ToDoList';
   res.render(createPath('view'));
  });
- app.use(express.static('ejs-View'));
  
-app.listen(PORT,(error) => {
-    error ? console.log(error) : console.log(`Listening port ${PORT}`);
+ app.get('/', (req,res) => {
+ if(document.querySelector(btnN).addEventListener('click', (e) => true)){
+  res.render('/flyWindow');
+ }
+})
+
+ app.use(express.static('ejs-View'));
+ app.listen(PORT,(error) => {
+  error ? console.log(error) : console.log(`Listening port ${PORT}`);
 })
