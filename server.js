@@ -1,5 +1,5 @@
 const express = require('express');
-const res = require('express/lib/response');
+//const res = require('express/lib/response');
 const mongoose = require('mongoose');
 const app = express();
 app.set('View engine', 'ejs');
@@ -23,7 +23,7 @@ mongoose
  }
 })
 
- app.use(express.static('ejs-View'));
+ app.use(express.static('ejs-View', 'style'));
  app.listen(PORT,(error) => {
   error ? console.log(error) : console.log(`Listening port ${PORT}`);
 })
