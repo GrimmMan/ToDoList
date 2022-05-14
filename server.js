@@ -17,10 +17,8 @@ mongoose
   res.render(createPath('view'));
  });
  
- app.get('/', (req,res) => {
- if(document.querySelector(btnN).addEventListener('click', (e) => true)){
-  res.render('/flyWindow');
- }
+ app.view('/View/view', (req,res) => {
+res.render(req.body);
 })
 
  app.use(express.static('ejs-View', 'style'));
