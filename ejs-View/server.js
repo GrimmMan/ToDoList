@@ -2,7 +2,7 @@ const jsdom = require('jsdom');
 const $ = require('jquery')//(new jsdom.JSDOM().window);
 const express = require('express');
 //const res = require('express/lib/response');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 //const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
 const app = express();
@@ -22,20 +22,20 @@ app.listen(PORT,(error) => {
   error ? console.log(error) : console.log(`Listening port ${PORT}`);
 });
   app.use("/ejs-View", express.static('./ejs-View'));
-  const urlP = express.urlencoded({extended: false});
-  
+  app.use(express.urlencoded({extended: false}));
+  app.use(bodyParser.json());
   app.get('/', (req,res) => {  
     const title = 'ToDoList'; 
     res.render(createPath('../view'));
   });
 
-  app.post('/', urlP, (req,res) => {
+  app.post('/', (req,res) => {
+    console.log(true);
     const {text} = req.body;
-    const result = {
+    const result1 = {
       text,
     };
-    console.log(true);
-    res.send(req.body);
+    res.render(('../view'), {result1});
   /*app.use((req, res, next) => {
     console.log('path: ${req.path}');
     console.log('method: ${req.method}');

@@ -7,7 +7,7 @@ const result1 = document.querySelector('#result1');
 save.addEventListener('click', (e) => {
     if(input1.value === '') return;
     delElem(input1.value);                      //it's need with out of server, for example
-    input1.value = '';
+    //input1.value = '';
    
 });
 
