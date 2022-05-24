@@ -56,7 +56,7 @@ app.post("/", (req, res) => {
  console.log(req.body);
  result
     .save()
-    .then((result) => res.redirect('/'))
+    .then(() => res.redirect('/'))
     .catch((error) => {
       console.log(error);
       //res.render(createPath(('../error'), {title: 'Error'}));
