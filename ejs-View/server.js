@@ -1,70 +1,90 @@
-const jsdom = require('jsdom');
-const $ = require('jquery')//(new jsdom.JSDOM().window);
-const express = require('express');
+//const jsdom = require("jsdom");
+//const $ = require("jquery"); //(new jsdom.JSDOM().window);
+const express = require("express");
 //const res = require('express/lib/response');
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 //const jsonParser = bodyParser.json();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const app = express();
 //const router = express.Router();
-app.set('View engine', 'ejs');
-const path = require('path');
+app.set("View engine", "ejs");
+const path = require("path");
 //const { request } = require('http');
 const PORT = 3000;
-const createPath = (page) => path.resolve(__dirname, 'ejs-View',`${page}.ejs`);
-const db = 'mongodb+srv://GrimmMan:pas12345@cluster0.kjis4.mongodb.net/Test?retryWrites=true&w=majority';
+const createPath = (page) => path.resolve(__dirname, "ejs-View", `${page}.ejs`);
+const db =
+  "mongodb+srv://GrimmMan:pas12345@cluster0.kjis4.mongodb.net/Test?retryWrites=true&w=majority";
 mongoose
-  .connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then((res) => console.log('Connect to DB'))
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((res) => console.log("Connect to DB"))
   .catch((error) => console.log(error));
-//const BodyToDoSchema = require('../Models/bodyToDo');
-app.listen(PORT,(error) => {
+const BodyToDoSchema = require("/Users/anna/Documents/ToDoList/Models/bodyToDo");
+app.listen(PORT, (error) => {
   error ? console.log(error) : console.log(`Listening port ${PORT}`);
 });
-  app.use("/ejs-View", express.static('./ejs-View'));
-  app.use(express.urlencoded({extended: false}));
-  app.use(bodyParser.json());
-  app.get('/', (req,res) => {  
-    const title = 'ToDoList'; 
-    res.render(createPath('../view'));
-  });
+app.use("/ejs-View", express.static("./ejs-View"));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-  app.post('/', (req,res) => {
-    console.log(true);
-    const {text} = req.body;
-    const result1 = {
-      text,
-    };
-    res.render(('../view'), {result1});
-  /*app.use((req, res, next) => {
+/*app.get('/', (req, res) => {
+  const title = "ToDoList";
+   const result1 = [{
+     text: 'iii',
+     date: 'xxx',
+   }];
+  // const result1 = [{
+  //   text: 'text',
+  //}];
+  res.render(createPath("../index"), {result1});    
+});*/
+
+app.get('/', (req,res) => {
+  const title = "ToDoList";
+  BodyToDoSchema
+  .find()
+  .sort({createdAt: -1 })
+  .then((result) => res.render(createPath('../index'), {result, title}))
+  .catch((error) => {
+   console.log(error);
+ })
+});
+
+app.post("/", (req, res) => {
+ const { text, date } = req.body;
+ const result = new BodyToDoSchema({ text, date });
+ console.log(result);
+ console.log(req.body);
+ result
+    .save()
+    .then((result) => res.redirect('/'))
+    .catch((error) => {
+      console.log(error);
+      //res.render(createPath(('../error'), {title: 'Error'}));
+    });
+});
+
+
+
+
+
+
+/*  BodyToDoSchema
+       .find()
+       .then((result1) => res.send({result1}))
+       .catch((error) => {
+        console.log(error);
+        //res.render(createPath('/'), ({title: 'Error'}));
+      });
+
+
+app.use((req, res, next) => {
     console.log('path: ${req.path}');
     console.log('method: ${req.method}');
     next();
-  });*/ 
-    /*const {text, date} = req.body;
-    const result = new BodyToDoSchema({text, date});
-    result
-       .save()
-       .then((result) => res.render(result))
-       .catch((error) => {
-         console.log(error);
-         //res.render(createPath({title: 'Error'}));
-       });*/
-  });
-
-  /*app.get('/', (req,res) => {
-    BodyToDoSchema
-       .find()
-       .then((view) => res.render(createPath('/', {result1})))
-       .catch((error) => {
-        console.log(error);
-        res.render(createPath('/'), ({title: 'Error'}));
-      });
-    res.render(createPath('../view'), {result1});
   });*/
- /*$(function() {
+/*$(function() {
   $('.me').mouseover(function() {
     alert('22222')
    })
  });*/
- //app.use(express.static('./view'));
+//app.use(express.static('./view'));

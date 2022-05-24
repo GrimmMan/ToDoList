@@ -1,13 +1,14 @@
 let input1 = document.querySelector('#input1');
 const save = document.querySelector('#save');
 const cancel = document.querySelector('#cancel');
-const result1 = document.querySelector('#result1');
+const result = document.querySelector('#result');
+//const result = document.querySelector('#result');
 
 
 save.addEventListener('click', (e) => {
-    if(input1.value === '') return;
-    delElem(input1.value);                      //it's need with out of server, for example
-    //input1.value = '';
+   // if(input1.value === '') return;
+    //delElem(input1.value);                      //it's need with out of server, for example
+   // input1.value = '';
    
 });
 
@@ -27,9 +28,9 @@ btn.addEventListener('click', (e) => {
 };
 
 cancel.addEventListener('click', (e) => {
-    if(input1.value != '') {
-    input1.value = '';
-    };
+    //if(input1.value != '') {
+  //  input1.value = '';
+   // };
 });
 
 /*delete1.addEventListener('click', (e) => {
