@@ -1,15 +1,11 @@
 //const jsdom = require("jsdom");
 //const $ = require("jquery"); //(new jsdom.JSDOM().window);
 const express = require("express");
-//const res = require('express/lib/response');
-const bodyParser = require("body-parser");
-//const jsonParser = bodyParser.json();
+//const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-//const router = express.Router();
 app.set("View engine", "ejs");
 const path = require("path");
-//const { request } = require('http');
 const PORT = 3000;
 const createPath = (page) => path.resolve(__dirname, "ejs-View", `${page}.ejs`);
 const db =
@@ -24,67 +20,44 @@ app.listen(PORT, (error) => {
 });
 app.use("/ejs-View", express.static("./ejs-View"));
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 
-/*app.get('/', (req, res) => {
+/*app.get('/:id', (req,res) => {
   const title = "ToDoList";
-   const result1 = [{
-     text: 'iii',
-     date: 'xxx',
-   }];
-  // const result1 = [{
-  //   text: 'text',
-  //}];
-  res.render(createPath("../index"), {result1});    
+  const result = {
+    id: '1',
+    text: 'T',
+    date: 'D',
+  };
+  res.render(createPath('../index'), {result, title})
 });*/
+
+app.post('/', (req, res) => {
+  const { text, date } = req.body;
+  const result = new BodyToDoSchema({ text, date });
+  console.log(result);
+  console.log(req.body);
+  result
+     .save()
+     .then(() => res.redirect('/'))
+     .catch((error) => {
+       console.log(error);
+       //res.render(createPath(('../error'), {title: 'Error'}));
+     });
+ });
 
 app.get('/', (req,res) => {
   const title = "ToDoList";
   BodyToDoSchema
   .find()
-  .sort({createdAt: -1 })
   .then((result) => res.render(createPath('../index'), {result, title}))
   .catch((error) => {
    console.log(error);
- })
+ });
 });
 
-app.post("/", (req, res) => {
- const { text, date } = req.body;
- const result = new BodyToDoSchema({ text, date });
- console.log(result);
- console.log(req.body);
- result
-    .save()
-    .then(() => res.redirect('/'))
-    .catch((error) => {
-      console.log(error);
-      //res.render(createPath(('../error'), {title: 'Error'}));
-    });
-});
-
-
-
-
-
-
-/*  BodyToDoSchema
-       .find()
-       .then((result1) => res.send({result1}))
-       .catch((error) => {
-        console.log(error);
-        //res.render(createPath('/'), ({title: 'Error'}));
-      });
-
-
-app.use((req, res, next) => {
-    console.log('path: ${req.path}');
-    console.log('method: ${req.method}');
-    next();
-  });*/
 /*$(function() {
   $('.me').mouseover(function() {
     alert('22222')
    })
  });*/
-//app.use(express.static('./view'));

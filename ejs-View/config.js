@@ -1,7 +1,6 @@
 let input1 = document.querySelector('#input1');
 const save = document.querySelector('#save');
 const cancel = document.querySelector('#cancel');
-const result = document.querySelector('#result');
 //const result = document.querySelector('#result');
 
 
@@ -38,3 +37,5 @@ cancel.addEventListener('click', (e) => {
     delete result2.value;
     };
 });*/
+
+  
