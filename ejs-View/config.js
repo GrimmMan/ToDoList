@@ -1,15 +1,26 @@
 let input1 = document.querySelector('#input1');
 const save = document.querySelector('#save');
 const cancel = document.querySelector('#cancel');
-//const result = document.querySelector('#result');
+const del = document.querySelector('#lel');
 
-
-save.addEventListener('click', (e) => {
-   // if(input1.value === '') return;
+document.addEventListener('click', (e) => {
+	const id = e.target?.dataset?.id || null;
+	if(id){
+		console.log(id);
+		fetch(`${id}`,{
+			method: 'DELETE',
+		}).then(() => {
+            window.location.reload();
+        });
+	};
+	
+});
+//save.addEventListener('click', (e) => {
+   //if(input1.value === '') return;
     //delElem(input1.value);                      //it's need with out of server, for example
    // input1.value = '';
    
-});
+//});
 
 function delElem(value) {                       //it's need with out of server, for example
     console.log(value);
@@ -27,9 +38,9 @@ btn.addEventListener('click', (e) => {
 };
 
 cancel.addEventListener('click', (e) => {
-    //if(input1.value != '') {
-  //  input1.value = '';
-   // };
+    if(input1.value != '') {
+    input1.value = '';
+    };
 });
 
 /*delete1.addEventListener('click', (e) => {

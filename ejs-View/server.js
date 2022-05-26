@@ -22,15 +22,25 @@ app.use("/ejs-View", express.static("./ejs-View"));
 app.use(express.urlencoded({ extended: false }));
 //app.use(bodyParser.json());
 
-/*app.get('/:id', (req,res) => {
+app.get('/', (req,res) => {
   const title = "ToDoList";
-  const result = {
-    id: '1',
-    text: 'T',
-    date: 'D',
-  };
-  res.render(createPath('../index'), {result, title})
-});*/
+  BodyToDoSchema
+  .find()
+  .then((result) => res.render(createPath('../index'), {result, title}))
+  .catch((error) => {
+   console.log(error);
+ });
+});
+
+app.get('../index/:id', (req,res) => {
+  const title = "ToDoList";
+  BodyToDoSchema
+  .findById(req.params.id)
+  .then((result) => res.render(createPath('../index'), {result, title}))
+  .catch((error) => {
+   console.log(error);
+ });
+});
 
 app.post('/', (req, res) => {
   const { text, date } = req.body;
@@ -46,16 +56,16 @@ app.post('/', (req, res) => {
      });
  });
 
-app.get('/', (req,res) => {
-  const title = "ToDoList";
+app.delete('/:id', (req,res) => {
   BodyToDoSchema
-  .find()
-  .then((result) => res.render(createPath('../index'), {result, title}))
+  .findByIdAndDelete(req.params.id)
+  .then(result => {
+    res.sendStatus(200);
+  })
   .catch((error) => {
    console.log(error);
  });
 });
-
 /*$(function() {
   $('.me').mouseover(function() {
     alert('22222')
