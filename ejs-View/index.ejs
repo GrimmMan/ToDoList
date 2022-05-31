@@ -25,18 +25,20 @@
 
 									<% if(result.length) { %>
 										<% result.forEach(({_id, text, createdAt})=> { %>
-											<% const id1=_id%>
+											<div id="str" name="str">
 												<li>
-													<%=text %>
+													<%= text %>
 														<%= (new Date(createdAt)).toLocaleDateString('en-GB')
 															|| 'No Date' %>
-															<button class="btn btn-outline-dark"
-																data-id="<%= _id %>">edit</button>
-															<button class="btn btn-outline-dark" type="button" data-id=" <%=_id
+															<a class=" btn btn-outline-dark"
+																href="/edit/<%= _id %>">edit
+															</a>
+															<button class=" btn btn-outline-dark" type="button" data-id=" <%=_id
 																%>" id="del">delete</button>
 												</li>
-												<% }) %>
-													<% } %>
+											</div>
+											<% }) %>
+												<% } %>
 
 								</ul>
 							</div>

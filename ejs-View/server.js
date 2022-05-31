@@ -20,7 +20,6 @@ app.listen(PORT, (error) => {
 });
 app.use("/ejs-View", express.static("./ejs-View"));
 app.use(express.urlencoded({ extended: false }));
-//app.use(bodyParser.json());
 
 app.get('/', (req,res) => {
   const title = "ToDoList";
@@ -37,6 +36,32 @@ app.get('../index/:id', (req,res) => {
   BodyToDoSchema
   .findById(req.params.id)
   .then((result) => res.render(createPath('../index'), {result, title}))
+  .catch((error) => {
+   console.log(error);
+ });
+});
+
+app.get('/edit', (req,res) => {
+  const title = "Edit";
+  res.render(createPath('../edit'), {title});
+});
+
+app.get('/edit/:id', (req,res) => {
+  const title = "Edit";
+  BodyToDoSchema
+  .findById(req.params.id)
+  .then((result) => res.render(createPath('../edit'), {result, title}))
+  .catch((error) => {
+   console.log(error);
+ });
+});
+
+app.post('/edit/:id', (req,res) => {
+  const { text, createdAt } = req.body;
+  const { id } = req.params;
+  BodyToDoSchema
+  .findByIdAndUpdate(id, { text, createdAt })
+  .then( () => res.redirect('/'))
   .catch((error) => {
    console.log(error);
  });
