@@ -2,3 +2,7 @@ input[type=text] {
     height: 170px;
     width: 465px;
 }
+input[type=info] {
+    height: 30px;
+    width: 200px;
+}

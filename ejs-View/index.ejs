@@ -16,31 +16,31 @@
 							<img src="/ejs-View/myImage.jpg" alt="Break system" />
 							<h1 class="fw-light">Break the System</h1>
 							<h2 class="lead text-muted">ToDoList</h2>
-							<p>Let's will make this!!!</p>
+							<p>Let's will make this Today!!!</p>
 							<button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								"Touch Me"</button>
-							<div name="id" id="id">
-								<ul name=" result" type="text" id="result">
-
-									<% if(result.length) { %>
-										<% result.forEach(({_id, text, createdAt})=> { %>
-											<div id="str" name="str">
-												<li>
-													<%= text %>
-														<%= (new Date(createdAt)).toLocaleDateString('en-GB') || 'No Date' %>
-															<a class="btn btn-outline-dark" href="/edit/<%= _id %>">edit </a>
-															<button class=" btn btn-outline-dark" type="button" data-id=" <%=_id
-																%>" id="del">delete</button>
-												</li>
-											</div>
-											<% }) %>
-												<% } %>
-
-								</ul>
-							</div>
 						</div>
 					</div>
 				</div>
+				</div>
+				<div class="ul-container text-center my-3 col-lg-8 col-md-6 mx-auto">
+					<ul name=" result" type="text" id="result">
+						<% if(result.length) { %>
+							<% result.forEach(({_id, text, createdAt, updatedAt})=> { %>
+								<div class="form-info my-2">
+									<li>
+										<%= text %>
+											<div>
+												<%= (new Date(updatedAt)).toLocaleDateString('en-GB') || 'No Date' %>
+													<a class=" btn btn-outline-dark" href="/edit/<%= _id %>">edit </a>
+													<button class=" btn btn-outline-dark" type="button" data-id="<%=_id	%>"
+														id="del">delete</button>
+											</div>
+									</li>
+								</div>
+								<% }) %>
+									<% } %>
+					</ul>
 				</div>
 				<script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
 					integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">

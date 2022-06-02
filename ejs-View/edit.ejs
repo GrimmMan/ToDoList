@@ -10,8 +10,9 @@
 			<form method="post">
 				<div class=" form-info text-center my-5">
 					<textarea type="text" value="" name="text" id="text" cols="150" rows="4"><%= result.text %></textarea>
-					<input name="createdAt" value="<%= (new Date(result.createdAt)).toLocaleDateString('en-GB') %>">
-					<button class="btn btn-outline-dark" type="submit">Save</button>
+					<input type="info" name="createdAt"
+						value="<%=(new Date(result.createdAt)).toLocaleDateString('en-GB') %> - <%=(new Date(result.updatedAt)).toLocaleDateString('en-GB') %>">
+					<button class=" btn btn-outline-dark" type="submit">Save</button>
 				</div>
 			</form>
 			<script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"

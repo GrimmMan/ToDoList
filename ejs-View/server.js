@@ -1,7 +1,6 @@
 //const jsdom = require("jsdom");
 //const $ = require("jquery"); //(new jsdom.JSDOM().window);
 const express = require("express");
-//const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
 app.set("View engine", "ejs");
@@ -28,6 +27,7 @@ app.get('/', (req,res) => {
   .then((result) => res.render(createPath('../index'), {result, title}))
   .catch((error) => {
    console.log(error);
+   res.render(createPath(('../error'), {title: 'Error'}));
  });
 });
 
@@ -38,6 +38,7 @@ app.get('../index/:id', (req,res) => {
   .then((result) => res.render(createPath('../index'), {result, title}))
   .catch((error) => {
    console.log(error);
+   res.render(createPath(('../error'), {title: 'Error'}));
  });
 });
 
@@ -53,6 +54,7 @@ app.get('/edit/:id', (req,res) => {
   .then((result) => res.render(createPath('../edit'), {result, title}))
   .catch((error) => {
    console.log(error);
+   res.render(createPath(('../error'), {title: 'Error'}));
  });
 });
 
@@ -64,20 +66,19 @@ app.post('/edit/:id', (req,res) => {
   .then( () => res.redirect('/'))
   .catch((error) => {
    console.log(error);
+   res.render(createPath(('../error'), {title: 'Error'}));
  });
 });
 
 app.post('/', (req, res) => {
   const { text, date } = req.body;
   const result = new BodyToDoSchema({ text, date });
-  console.log(result);
-  console.log(req.body);
   result
      .save()
      .then(() => res.redirect('/'))
      .catch((error) => {
        console.log(error);
-       //res.render(createPath(('../error'), {title: 'Error'}));
+       res.render(createPath(('../error'), {title: 'Error'}));
      });
  });
 
@@ -92,7 +93,4 @@ app.delete('/:id', (req,res) => {
  });
 });
 /*$(function() {
-  $('.me').mouseover(function() {
-    alert('22222')
-   })
  });*/
