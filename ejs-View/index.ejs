@@ -17,8 +17,7 @@
 							<h1 class="fw-light">Break the System</h1>
 							<h2 class="lead text-muted">ToDoList</h2>
 							<p>Let's will make this!!!</p>
-							<button type="button" class=" btn btn-primary" data-bs-toggle="modal"
-								data-bs-target="#exampleModal">
+							<button type="button" class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 								"Touch Me"</button>
 							<div name="id" id="id">
 								<ul name=" result" type="text" id="result">
@@ -28,11 +27,8 @@
 											<div id="str" name="str">
 												<li>
 													<%= text %>
-														<%= (new Date(createdAt)).toLocaleDateString('en-GB')
-															|| 'No Date' %>
-															<a class=" btn btn-outline-dark"
-																href="/edit/<%= _id %>">edit
-															</a>
+														<%= (new Date(createdAt)).toLocaleDateString('en-GB') || 'No Date' %>
+															<a class="btn btn-outline-dark" href="/edit/<%= _id %>">edit </a>
 															<button class=" btn btn-outline-dark" type="button" data-id=" <%=_id
 																%>" id="del">delete</button>
 												</li>
@@ -47,8 +43,7 @@
 				</div>
 				</div>
 				<script src=" https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-					integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-					crossorigin="anonymous">
+					integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
 					</script>
 				<script src="https://code.jquery.com/jquery-3.6.0.js"
 					integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

@@ -1,6 +1,8 @@
 let text = document.querySelector('#text');
 const save = document.querySelector('#save');
 const cancel = document.querySelector('#cancel');
+const input2 = document.querySelector('#input2');
+const btnGoogle = document.querySelector('#google');
 
 document.addEventListener('click', (e) => {
 	const id = e.target?.dataset?.id || null;
@@ -36,8 +38,15 @@ btn.addEventListener('click', (e) => {
 });
 };*/
 
-cancel.addEventListener('click', (e) => {
+cancel.addEventListener('click', () => {
    text.value = '';
+   location.reload();
 });
 
+btnGoogle.addEventListener('click', () => {
+    const url = 'https://www.google.com/search?q='+input2.value;
+    window.open(url);
+    input2.value = '';
+    location.reload();
+});
   
