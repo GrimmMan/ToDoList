@@ -6,7 +6,7 @@ const app = express();
 app.set("View engine", "ejs");
 const path = require("path");
 const PORT = 3000;
-const createPath = (page) => path.resolve(__dirname, "views", `${page}.ejs`);
+const createPath = (page) => path.resolve(__dirname, ".../", `${page}.ejs`);
 const db =
   "mongodb+srv://GrimmMan:pas12345@cluster0.kjis4.mongodb.net/Test?retryWrites=true&w=majority";
 mongoose
@@ -17,7 +17,7 @@ const BodyToDoSchema = require("/Users/anna/Documents/ToDoList/Models/bodyToDo")
 app.listen(PORT, (error) => {
   error ? console.log(error) : console.log(`Listening port ${PORT}`);
 });
-app.use("/views", express.static("./views"));
+app.use("/", express.static("./"));
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
